@@ -1,61 +1,58 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-const string my = "1543";
 
-int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
-    ll t = 1; cin >> t;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-    while (t--) {
+    int t; cin >> t;
+    while(t--)
+    {
         int n, m; cin >> n >> m;
-        char a[n][m];
+        vector <string> a(n);
         for(int i = 0; i < n; i++){
-            for(int j = 0; j < m; j++)
-                cin >> a[i][j];
+            string x; cin >> x;
+            a[i] = x;
         }
 
-        int top = 0, bottom = n-1, left = 0, right = m-1;
+        // check all layers
+        int left = 0, right = m-1,
+        top = 0, bottom = n-1, ans = 0;
 
-        int ans = 0;
-        while(top <= bottom and left <= right) {
+        while(left <= right and top <= bottom)
+        {
             string s = "";
+            for(int i = left; i <= right; i++)
+                s += a[top][i];
+            top++;
 
-            for(int i = left; i <= right; ++i)
-                s += to_string(a[top][i]);
-            ++top;
-
-            for(int i = top; i <= bottom; ++i)
-                s += to_string(a[i][right]);
-            --right;
-
-            if(top <= bottom) {
-                for(int i = right; i >= left; --i)
-                    s += to_string(a[bottom][i]);
-                --bottom;
-            }
+            for(int i = top; i <= bottom; i++)
+                s += a[i][right];
+            right--;
 
             if(left <= right) {
-                for(int i = bottom; i >= top; --i)
-                    s += to_string(a[i][left]);
-                ++left;
+                for(int i = right; i >=left; i--)
+                    s += a[bottom][i];
+                bottom--;
             }
 
-            // cout << s << endl;
-            
+            if(top <= bottom) {
+                for(int i = bottom; i >= top; i--)
+                    s += a[i][left];
+                left++;
+            }
 
-            for(int i = 0; i < n-4; i++){
-                string x = s.substr(i, 4);
-                if(x == my) {
+            s += s.substr(0, 3);
+
+            // cout << s << '\n';
+
+            // count number of substring
+            for(int i = 0; i+3 <= s.size(); i++){
+                if(s.substr(i, 4) == "1543")
                     ans++;
-                    i+=3;
-                }
             }
-
         }
-        
-        cout << ans << '\n';
-        
+        cout << ans <<'\n';
     }
-    return 0;
 }
