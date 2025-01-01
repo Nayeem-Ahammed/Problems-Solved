@@ -1,0 +1,32 @@
+/**
+  *    Author:     Binary-Brigade
+  *    Created:    01.01.2025  17:50:38
+  *    Prombem:    _____
+ */
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+#define all(v) v.begin(), v.end()
+#define rep(i, n) for(int i = 0; i < (n); i++)
+#define debug(x) cout << #x << " = " << x << endl;
+
+void solve() {
+    ll n; cin >> n;
+    vector<ll> a(n);
+    rep(i, n) cin >> a[i];
+
+    
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+
+    ll tc = 1; cin >> tc;
+    rep(t, tc) {
+        // cout <<"Case #" << t+1 << ": ";
+        solve();
+    }
+    return 0;
+}
